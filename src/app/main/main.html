@@ -1,17 +1,28 @@
 <div class="container">
+  <h1>ohai, it's ma blog</h1>
 
-  <div>
-    <navbar test-value="main.testValue()" />
+  <div class="row">
+    <div class="col-sm-6">
+    <form novalidate>
+      <div class="form-group">
+        <label for="post-title">Title</label>
+        <input type="text" class="form-control" id="post-title" ng-model="newPost.title">
+      </div>
+
+      <div class="form-group">
+        <label for="post-body">Body</label>
+        <textarea class="form-control" id="post-body" ng-model="newPost.body"></textarea>
+      </div>
+      <input type="submit" ng-click="update(user)" value="Save" class="btn btn-primary"/>
+    </form>
+    </div>
   </div>
 
-  <h1>ohai</h1>
+  <div class="row" ng-repeat="post in main.allPosts">
+    <div class="col-sm-6">
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.body }}</p>
+    </div>
+  </div>
 
-  <button type="button"
-          class="btn btn-lg btn-primary"
-          data-animation="am-fade-and-scale"
-          data-placement="center"
-          data-html="true"
-          bs-modal="main.testModal">
-      Test modal
-  </button>
 </div>

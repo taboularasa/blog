@@ -6,7 +6,12 @@ import runBlock from './index.run';
 import MainController from './main/main.controller';
 import NavbarDirective from './components/navbar/navbar.directive';
 
-angular.module('blog', ['ui.router', 'ngAnimate', 'ngSanitize', 'mgcrea.ngStrap'])
+angular.module(
+  'blog',
+  ['ui.router', 'ngAnimate', 'ngSanitize', 'mgcrea.ngStrap', 'restangular']
+);
+
+angular.module('blog')
   .config(config)
   .config(routerConfig)
   .run(runBlock)

@@ -1,13 +1,11 @@
-function MainController () {
+function MainController (Restangular) {
   'ngInject';
+  var basePosts = Restangular.all('posts');
+  this.allPosts = basePosts.getList().$object;
+  this.newPost = {};
 
-  this.testModal = {
-    "title": "HAHA",
-    "content": "<p> hahah <b>hoho</b></p>"
-  };
-
-  this.testValue = function () {
-    return Date.now();
+  this.createPost = function(userAttrs) {
+    basePosts.post(userAttrs);
   };
 }
 
