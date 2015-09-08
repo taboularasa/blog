@@ -1,15 +1,21 @@
 function MainController (Restangular) {
   'ngInject';
-  var basePosts = Restangular.all('posts');
-  this.allPosts = basePosts.getList().$object;
-  this.newPost = {};
+  var postsResource = Restangular.all('posts');
 
-  this.createPost = function() {
-    basePosts.post(this.newPost).then(function(){
-      this.allPosts = basePosts.getList().$object;
+  this.refreshPosts = function() {
+    postsResource.getList().then(function success(posts) {
+      this.allPosts = posts;
       this.newPost = {};
     }.bind(this));
   };
+
+  this.createPost = function() {
+    postsResource.post(this.newPost).then(function success(){
+      this.refreshPosts();
+    }.bind(this));
+  };
+
+  this.refreshPosts()
 }
 
 export default MainController;
