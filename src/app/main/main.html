@@ -6,14 +6,14 @@
     <form novalidate>
       <div class="form-group">
         <label for="post-title">Title</label>
-        <input type="text" class="form-control" id="post-title" ng-model="newPost.title">
+        <input type="text" class="form-control" id="post-title" ng-model="main.newPost.title">
       </div>
 
       <div class="form-group">
         <label for="post-body">Body</label>
-        <textarea class="form-control" id="post-body" ng-model="newPost.body"></textarea>
+        <textarea class="form-control" id="post-body" ng-model="main.newPost.body"></textarea>
       </div>
-      <input type="submit" ng-click="update(user)" value="Save" class="btn btn-primary"/>
+      <input type="submit" ng-click="main.createPost()" value="Save" class="btn btn-primary"/>
     </form>
     </div>
   </div>

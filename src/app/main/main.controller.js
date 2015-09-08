@@ -4,8 +4,11 @@ function MainController (Restangular) {
   this.allPosts = basePosts.getList().$object;
   this.newPost = {};
 
-  this.createPost = function(userAttrs) {
-    basePosts.post(userAttrs);
+  this.createPost = function() {
+    basePosts.post(this.newPost).then(function(){
+      this.allPosts = basePosts.getList().$object;
+      this.newPost = {};
+    }.bind(this));
   };
 }
 
