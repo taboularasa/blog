@@ -3,17 +3,23 @@
 
   <div class="row">
     <div class="col-sm-6">
-    <form novalidate>
-      <div class="form-group">
-        <label for="post-title">Title</label>
-        <input type="text" class="form-control" id="post-title" ng-model="main.newPost.title">
+    <form name="main.form" ng-submit="main.createPost()" novalidate>
+      <div class="form-group" ng-class="{'has-error': main.form.title.$invalid}">
+        <label class="control-label" for="post-title">Title</label>
+        <input type="text" class="form-control" id="post-title" ng-model="main.newPost.title" name="title" server-error>
+        <div class="errors" ng-show="main.form.title.$invalid">
+          <span ng-show="main.form.title.$error.server">{{ main.form.title.$error.server }}</span>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="post-body">Body</label>
-        <textarea class="form-control" id="post-body" ng-model="main.newPost.body"></textarea>
+      <div class="form-group" ng-class="{'has-error': main.form.body.$invalid}">
+        <label class="control-label" for="post-body">Body</label>
+        <textarea class="form-control" id="post-body" ng-model="main.newPost.body" name="body" server-error></textarea>
+        <div class="errors" ng-show="main.form.body.$invalid">
+          <span ng-show="main.form.body.$error.server" class="help-inline">{{ main.form.body.$error.server }}</span>
+        </div>
       </div>
-      <input type="submit" ng-click="main.createPost()" value="Save" class="btn btn-primary"/>
+      <input type="submit" class="btn btn-primary"/>
     </form>
     </div>
   </div>
