@@ -1,6 +1,7 @@
-function MainController ($log, Restangular) {
+function MainController ($log, $scope, Restangular) {
   'ngInject';
 
+  this.form = $scope.form
   var postsResource = Restangular.all('posts');
 
   this.refreshPosts = function() {
@@ -19,8 +20,6 @@ function MainController ($log, Restangular) {
         this.refreshPosts();
       }.bind(this),
       function failure(response) {
-        this.form.title.$setUntouched()
-        debugger
         _.forOwn(response.data, function(value, key) {
           this.form[key].$setValidity("server", false);
           this.form[key].$error.server = value.join(", ")
