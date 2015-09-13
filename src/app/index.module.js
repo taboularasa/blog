@@ -5,6 +5,7 @@ import routerConfig from './index.route';
 import runBlock from './index.run';
 import MainController from './main/main.controller';
 import NavbarDirective from './components/navbar/navbar.directive';
+import TitleUniquenessValidator from './directives/validators/title_uniqueness';
 
 angular.module(
   'blog',
@@ -24,3 +25,4 @@ angular.module('blog')
   .run(runBlock)
   .controller('MainController', MainController)
   .directive('navbar', NavbarDirective)
+  .directive('titleUniquenessValidator', TitleUniquenessValidator);

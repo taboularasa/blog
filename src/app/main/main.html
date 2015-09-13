@@ -6,9 +6,13 @@
     <form name="form" ng-submit="vm.createPost()">
       <div class="form-group" ng-class="{'has-error': form.title.$dirty && form.title.$invalid}">
         <label class="control-label" for="post-title">Title</label>
-        <input type="text" class="form-control" id="post-title" ng-model="vm.newPost.title" name="title" required>
+        <input type="text" class="form-control" id="post-title" ng-model="vm.newPost.title" name="title" required title-uniqueness-validator>
+        <div ng-if="form.title.$pending">
+          Checking Title...
+        </div>
         <ng-messages for="form.title.$error" ng-if="form.title.$dirty">
           <ng-message when="required" class="warning">This is required</ng-message>
+          <ng-message when="titleUnique" class="warning">This title has been used already</ng-message>
         </ng-messages>
       </div>
 
