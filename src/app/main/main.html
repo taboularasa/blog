@@ -26,9 +26,18 @@
 
       <div class="form-group" ng-class="{'has-error': form.body.$dirty && form.body.$invalid}">
         <label class="control-label" for="post-body">Body</label>
-        <textarea class="form-control" id="post-body" ng-model="vm.newPost.body" name="body" required></textarea>
+        <textarea class="form-control"
+                  id="post-body"
+                  ng-model="vm.newPost.body"
+                  ng-model-options="{ updateOn: 'default blur', debounce: {'default': 300, 'blur': 0} }"
+                  name="body"
+                  required server-validator></textarea>
+        <div ng-if="form.body.$pending">
+          <i class="fa fa-life-bouy faa-spin animated"></i> Checking Body...
+        </div>
         <ng-messages for="form.body.$error" ng-if="form.body.$dirty">
-          <ng-message when="required" class="error">This is required</ng-message>
+          <ng-message when="required" class="warning">This is required</ng-message>
+          <ng-message when="serverValidator" class="warning">This body has been used already</ng-message>
         </ng-messages>
       </div>
       <input type="submit" class="btn btn-primary" ng-disabled="form.$invalid || form.$pending" />
