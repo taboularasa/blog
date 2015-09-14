@@ -1,9 +1,9 @@
-function TitleUniquenessValidator ($q, $http) {
+function ServerValidator ($q, $http) {
   'ngInject';
 
   var link = function($scope, element, attrs, ngModel) {
-    ngModel.$asyncValidators.titleUnique = function(title) {
-      var params = JSON.stringify({ 'title' : title });
+    ngModel.$asyncValidators.serverValidator = function(attribute) {
+      var params = JSON.stringify({ 'title' : attribute });
       return $http.get(`http://localhost:4000/posts/validate?post=${params}`).
         then(function resolved(response){
           if (response.data.errors.title) {
@@ -22,4 +22,4 @@ function TitleUniquenessValidator ($q, $http) {
 
 }
 
-export default TitleUniquenessValidator;
+export default ServerValidator;

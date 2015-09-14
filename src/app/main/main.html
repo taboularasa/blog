@@ -10,16 +10,17 @@
                class="form-control"
                id="post-title"
                ng-model="vm.newPost.title"
-               ng-model-options="{ debounce: 500 }"
+               ng-model-options="{ updateOn: 'default blur', debounce: {'default': 300, 'blur': 0} }"
                name="title"
                required
-               title-uniqueness-validator>
+               server-validator>
+
         <div ng-if="form.title.$pending">
           <i class="fa fa-life-bouy faa-spin animated"></i> Checking Title...
         </div>
         <ng-messages for="form.title.$error" ng-if="form.title.$dirty">
           <ng-message when="required" class="warning">This is required</ng-message>
-          <ng-message when="titleUnique" class="warning">This title has been used already</ng-message>
+          <ng-message when="serverValidator" class="warning">This title has been used already</ng-message>
         </ng-messages>
       </div>
 
