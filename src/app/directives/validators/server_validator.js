@@ -4,13 +4,12 @@ function ServerValidator ($q, $http) {
   var link = function($scope, element, attrs, ngModel) {
     ngModel.$asyncValidators.serverValidator = function(title) {
       var key = attrs.name;
-      var params = {}
-      params[key] = title
-      var params = JSON.stringify(params);
-      return $http.get(`http://localhost:4000/posts/validate?post=${params}`).
+      var params = { post: {}}
+      params.post[key] = title
+      return $http.post("http://localhost:4000/posts/validate", params).
         then(function resolved(response){
-          if (response.data.errors.title) {
-            return $q.reject(response.data.errors.title[0]);
+          if (response.data.errors[key]) {
+            return $q.reject(response.data.errors[key][0]);
           } else {
             return true;
           }
