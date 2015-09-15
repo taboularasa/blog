@@ -8,7 +8,7 @@ function MainController ($log, $scope, Restangular) {
   }
 
   this.createPost = function() {
-    postsResource.post(this.newPost).then(
+    postsResource.post(this.post).then(
       function success() {
         this.refreshPosts();
       }.bind(this)
@@ -19,7 +19,7 @@ function MainController ($log, $scope, Restangular) {
     postsResource.getList().then(function success(posts) {
       this.allPosts = posts;
       this.form().$setPristine();
-      this.newPost = { title: "", body: "" };
+      this.post = { title: "", body: "" };
     }.bind(this));
   };
 
